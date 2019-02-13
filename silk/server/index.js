@@ -47,6 +47,11 @@ const resolvers = {
     users: () => User.find(),
   },
   Mutation: {
+    createUser: async (_, { username, email, checkAdmin }) => {
+      const user = new User({ username, email, checkAdmin });
+      await user.save();
+      return user;
+    }, 
 
   }
 };
