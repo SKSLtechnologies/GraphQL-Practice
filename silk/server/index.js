@@ -1,95 +1,57 @@
-const { GraphQLServer } = require('graphql-yoga')
+const { GraphQLServer } = require("graphql-yoga");
 
+/* MONGOOSE SETUP */
+// Configuring the database
+const dbConfig = require('../config/database.config.js');
+const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 
-//pseudo database
-let usersdb = [{
-    id: '0',
-    name: 'Ononn',
-    isAdmin: true, 
-    age: 12
-  },
-  {
-    id: '1',
-    name: 'Silk',
-    isAdmin: false,
-    age: 14
-}];
-let idCount = usersdb.length
+mongoose.Promise = global.Promise;
 
-// declaration 
+// Connecting to the database
+mongoose.connect(dbConfig.url, {}).then(() => {
+    console.log("Successfully connected to the database! ");    
+}).catch(err => {
+    console.log('Could not connect to the database. Exiting now.');
+    process.exit();
+});
+
+const User = mongoose.model("User", {
+  username: String,
+  email: String,
+  checkAdmin: Boolean
+});
+
 const typeDefs = `
-type User {
+  type Query {
+    hello(name: String): String!
+    users: [User]
+  }
+
+  type User {
     id: ID!
-    name: String!
-    isAdmin: Boolean! 
-    age: Int!
-}
-type Query {
-  info: String!
-  hero(name: String): String!
-  allUsers: [User!]!
-  user(id: ID!): User!
-}
+    username: String!
+    email: String!
+    checkAdmin: Boolean
+  }
+  type Mutation {
+    createUser(username: String!, email: String!, checkAdmin: Boolean): User
+    updateUser(id: ID!, username: String!): Boolean
+    removeUser (id: ID!): Boolean
+  }
+`;
 
-type Mutation {
-    post(name: String!): User!
-    update(id: ID! , name: String!) : User!
-}
-`
-
-
-
-// resolvers - actual implementation 
 const resolvers = {
   Query: {
-    info: () => `This is the first GraphQL project`,
-    hero: (_, {name}) => `My hero is ${name || "Boy"}`,
-    allUsers: () => {
-        console.log(usersdb);
-        return usersdb
-    },
-    user: (_, { id }) => {
-        const user = usersdb.find(user => user.id === id);
-        if (!user) {
-          throw new Error('Cannot find your user!');
-        }
-        return user;
-      }
+    hello: (_, { name }) => `Hello ${name || "World"}`,
+    users: () => User.find(),
   },
   Mutation: {
-    // 2
-    post: (parent, args) => {
-       const user = {
-        id: `user-${idCount++}`,
-        name: args.name
-      }
-      usersdb.push(user)
-      return user
-    },
 
-    update: (parent,args) => {
-        let user = usersdb.find(user => user.id === args.id);
-        if (!user) {
-            throw new Error('Cannot find your user!');
-          }
-        user = {
-            id: args.id,
-            name: args.name,
-            isAdmin: user.isAdmin,
-            age: user.age
-          }
-        return user
-    }
   }
-}
+};
 
-
-
-// typedefs and mutation bundled and passed to the server
-const server = new GraphQLServer({
-  typeDefs,
-  resolvers,
-})
-server.start(() => console.log(`>>> 🌎  Server is running on http://localhost:4000`))
+const server = new GraphQLServer({ typeDefs, resolvers });
+  server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
 
 
