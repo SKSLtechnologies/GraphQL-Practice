@@ -52,7 +52,14 @@ const resolvers = {
       await user.save();
       return user;
     }, 
-
+    updateUser: async (_, {id, username}) => {
+      await User.findByIdAndUpdate(id, { username });
+      return true;
+    },
+    removeUser: async (_, {id}) => {
+      await User.findByIdAndDelete (id);
+      return true;
+    },
   }
 };
 
