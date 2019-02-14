@@ -8,11 +8,12 @@ type User {
     id: ID!
     username: String!
     email: String!
+    password: String!
     checkAdmin: Boolean
 }
   
 type Mutation {
-    createUser(username: String!, email: String!, checkAdmin: Boolean): User
+    createUser(username: String!, email: String!, checkAdmin: Boolean, password: String!): User
     updateUser(id: ID!, username: String!): Boolean
     removeUser (id: ID!): Boolean
 }

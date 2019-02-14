@@ -32,8 +32,12 @@ const resolvers = {
     users: () => User.find(),
   },
   Mutation: {
-    createUser: async (_, { username, email, checkAdmin }) => {
-      const user = new User({ username, email, checkAdmin });
+    createUser: async (_, { username, password, email, checkAdmin }) => {
+      const user = new User ();
+      user.email = email; 
+      user.checkAdmin = checkAdmin;
+      user.username = username;
+      user.setPassword(password); 
       await user.save();
       return user;
     }, 
@@ -54,19 +58,43 @@ const server = new GraphQLServer({
 })
   server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
 
+//   const User =require('../../models/User') 
+
+//   module.exports = (app) => {  
+//       app.post('/api/account/signup', function (req, res) {
+//           const { body } = req; 
+//           const {firstName, lastName, username, email, password} = body;
+//           if(!password) { 
+//               return res.status(401).json({message:"Password cannot be blank"});
+//           }
+          
+//               const user = new User ();
+//               user.email = email; 
+//               user.firstName = firstName;
+//               user.lastName = lastName;
+//               user.username = username;
+//               user.setPassword(password); 
+//               user.save((err, user) => {
+//                   if(err){
+//                       return res.status(500).json({message:err.message});
+//                   } 
+//                   console.log(user)
+//                   return res.status(200).json({user: user.toAuthJSON()});
+//               });
+//           });
+//   }
 
 
 
 
+// // const userSchema = require('./graphql/index').userSchema;
+// // app.use('/graphql', cors(), graphqlHTTP({
+// //   schema: userSchema,
+// //   rootValue: global,
+// //   graphiql: true
+// // }));
 
-// const userSchema = require('./graphql/index').userSchema;
-// app.use('/graphql', cors(), graphqlHTTP({
-//   schema: userSchema,
-//   rootValue: global,
-//   graphiql: true
-// }));
-
-// // Up and Running at Port 4000
-// app.listen(process.env.PORT || 4000, () => {
-//   console.log('A GraphQL API running at port 4000');
-// });
+// // // Up and Running at Port 4000
+// // app.listen(process.env.PORT || 4000, () => {
+// //   console.log('A GraphQL API running at port 4000');
+// // });
