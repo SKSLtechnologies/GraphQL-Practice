@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 
 mongoose.set('useCreateIndex', true);
 
-const User =  new mongoose.model({
+const UserDetails =  new mongoose.Schema({
     username: {
         type: String, 
         lowercase: true, 
@@ -28,6 +28,6 @@ const User =  new mongoose.model({
   
 
 
-UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
+UserDetails.plugin(uniqueValidator, {message: 'is already taken.'});
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', UserDetails);

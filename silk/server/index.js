@@ -23,13 +23,8 @@ mongoose.connect(dbConfig.url, {}).then(() => {
     process.exit();
 });
 
-const User = mongoose.model("User", {
-  username: String,
-  email: String,
-  checkAdmin: Boolean
-});
 
-
+const User =require ('../server/models/user.js') 
 
 const resolvers = {
   Query: {
