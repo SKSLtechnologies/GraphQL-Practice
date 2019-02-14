@@ -16,8 +16,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
-mongoose.connect(dbConfig.url, {}).then(() => {
-    console.log("Successfully connected to the database! ");    
+mongoose.connect(dbConfig.url, {useNewUrlParser: true} ).then(() => {
+    console.log("Successfully connected to the database.");    
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now.');
     process.exit();
@@ -42,8 +42,8 @@ const resolvers = {
       return user;
     }, 
     updateUser: async (_, {id, username}) => {
-      await User.findByIdAndUpdate(id, { username });
-      return true;
+      const user = await User.findByIdAndUpdate(id, { username }, {new: true});
+      return user;
     },
     removeUser: async (_, {id}) => {
       await User.findByIdAndDelete (id);
@@ -57,44 +57,3 @@ const server = new GraphQLServer({
   resolvers,
 })
   server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
-
-//   const User =require('../../models/User') 
-
-//   module.exports = (app) => {  
-//       app.post('/api/account/signup', function (req, res) {
-//           const { body } = req; 
-//           const {firstName, lastName, username, email, password} = body;
-//           if(!password) { 
-//               return res.status(401).json({message:"Password cannot be blank"});
-//           }
-          
-//               const user = new User ();
-//               user.email = email; 
-//               user.firstName = firstName;
-//               user.lastName = lastName;
-//               user.username = username;
-//               user.setPassword(password); 
-//               user.save((err, user) => {
-//                   if(err){
-//                       return res.status(500).json({message:err.message});
-//                   } 
-//                   console.log(user)
-//                   return res.status(200).json({user: user.toAuthJSON()});
-//               });
-//           });
-//   }
-
-
-
-
-// // const userSchema = require('./graphql/index').userSchema;
-// // app.use('/graphql', cors(), graphqlHTTP({
-// //   schema: userSchema,
-// //   rootValue: global,
-// //   graphiql: true
-// // }));
-
-// // // Up and Running at Port 4000
-// // app.listen(process.env.PORT || 4000, () => {
-// //   console.log('A GraphQL API running at port 4000');
-// // });
