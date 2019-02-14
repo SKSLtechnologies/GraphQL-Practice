@@ -1,4 +1,11 @@
 const { GraphQLServer } = require("graphql-yoga");
+const express = require("express");
+const graphqlHTTP = require("express-graphql");
+const cors = require("cors");
+const app = express();
+
+app.use('*', cors());
+
 
 /* MONGOOSE SETUP */
 // Configuring the database
@@ -53,3 +60,18 @@ const server = new GraphQLServer({
   server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
 
 
+
+
+
+
+// const userSchema = require('./graphql/index').userSchema;
+// app.use('/graphql', cors(), graphqlHTTP({
+//   schema: userSchema,
+//   rootValue: global,
+//   graphiql: true
+// }));
+
+// // Up and Running at Port 4000
+// app.listen(process.env.PORT || 4000, () => {
+//   console.log('A GraphQL API running at port 4000');
+// });
