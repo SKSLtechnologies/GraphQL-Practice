@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-// var crypto = require('crypto');
 var uniqueValidator = require('mongoose-unique-validator');
-// var jwt = require('jsonwebtoken');
-// var secret = require('../../config').secret;
+
 
 mongoose.set('useCreateIndex', true);
 
