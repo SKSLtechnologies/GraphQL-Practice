@@ -22,24 +22,7 @@ const User = mongoose.model("User", {
   checkAdmin: Boolean
 });
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-    users: [User]
-  }
 
-  type User {
-    id: ID!
-    username: String!
-    email: String!
-    checkAdmin: Boolean
-  }
-  type Mutation {
-    createUser(username: String!, email: String!, checkAdmin: Boolean): User
-    updateUser(id: ID!, username: String!): Boolean
-    removeUser (id: ID!): Boolean
-  }
-`;
 
 const resolvers = {
   Query: {
@@ -63,7 +46,10 @@ const resolvers = {
   }
 };
 
-const server = new GraphQLServer({ typeDefs, resolvers });
+const server = new GraphQLServer({
+  typeDefs: '../server/models/schema.graphql',
+  resolvers,
+})
   server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
 
 

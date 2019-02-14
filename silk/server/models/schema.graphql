@@ -1,0 +1,18 @@
+
+type Query {
+    hello(name: String): String!
+    users: [User]
+}
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    checkAdmin: Boolean
+}
+  
+type Mutation {
+    createUser(username: String!, email: String!, checkAdmin: Boolean): User
+    updateUser(id: ID!, username: String!): Boolean
+    removeUser (id: ID!): Boolean
+}
