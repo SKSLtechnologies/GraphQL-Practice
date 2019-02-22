@@ -24,15 +24,16 @@ mongoose.connect(dbConfig.url, {useNewUrlParser: true} ).then(() => {
 });
 
 
-const User =require ('../server/models/user.js') 
+const User = require ('../server/models/user.js') 
 
-const resolvers = {
+
+const resolvers = { 
   Query: {
     hello: (_, { name }) => `Hello ${name || "World"}`,
     users: () => User.find(),
   },
   Mutation: {
-    createUser: async (_, { username, password, email, checkAdmin }) => {
+    signUp: async (_, { username, password, email, checkAdmin }) => {
       const user = new User ();
       user.email = email; 
       user.checkAdmin = checkAdmin;
@@ -52,8 +53,9 @@ const resolvers = {
   }
 };
 
+
 const server = new GraphQLServer({
   typeDefs: '../server/models/schema.graphql',
-  resolvers,
+  resolvers ,
 })
   server.start(() => console.log(">>> 🌎  Server is running on http://localhost:4000"));
