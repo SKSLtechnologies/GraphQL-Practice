@@ -1,0 +1,38 @@
+{
+  "name": "mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "bluebird": "^3.5.3",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "*",
+    "cors": "^2.8.5",
+    "mongoose-unique-validator": "^2.0.2",
+    "ejs": "^2.6.1",
+    "express": "4.16.4",
+    "express-graphql": "^0.7.1",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-handlebars": "*",
+    "express-validator": "^5.3.0",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.2",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "*",
+    "mongodb-bluebird": "^0.1.2",
+    "mongoose": "*",
+    "nodemon": "^1.18.6",
+    "passport": "^0.4.0",
+    "passport-jwt": "*",
+    "passport-local": "^1.0.0",
+    "passport-token": "*"
+  },
+  "author": "anannya",
+  "license": "ISC"
+}
