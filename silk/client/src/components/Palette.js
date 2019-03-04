@@ -11,11 +11,30 @@ const theme = createMuiTheme({
   typography: { useNextVariants: true },
 });
 
+
+
 function Palette() {
   return (
     <MuiThemeProvider theme={theme}>
-      <Button color="primary">Primary</Button>
-      <Button color="secondary">Secondary</Button>
+      <div> 
+          <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Sign up
+              </Button>
+        </div>
+        <div>
+        <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+              >
+                Cancel
+              </Button>
+        </div>
     </MuiThemeProvider>
   );
 }
