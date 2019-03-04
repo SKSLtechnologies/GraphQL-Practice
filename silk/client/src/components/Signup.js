@@ -47,7 +47,7 @@ const styles = theme => ({
   },
 });
 
-function Application(props) {
+function Signup(props) {
     const { classes } = props;
   
 
@@ -56,7 +56,7 @@ function Application(props) {
           <CssBaseline />
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5" align="center">
-              Sign in
+              Sign up
             </Typography>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>
@@ -64,12 +64,16 @@ function Application(props) {
                 <Input id="email" name="email" autoComplete="email" autoFocus />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="username">Username</InputLabel>
+                <Input id="username" name="username" autoComplete="username"  />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input name="password" type="password" id="password" autoComplete="current-password" />
               </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Are you an admin?"
               />
               <Button
                 type="submit"
@@ -78,7 +82,7 @@ function Application(props) {
                 color="primary"
                 className={classes.submit}
               >
-                Sign in
+                Sign up
               </Button>
             </form>
           </Paper>
@@ -86,8 +90,8 @@ function Application(props) {
       );
     }
 
-Application.propTypes = {
+Signup.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Application);
+export default withStyles(styles)(Signup);
