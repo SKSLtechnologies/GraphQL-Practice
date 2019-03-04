@@ -1,38 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
+import NavBar from './components/NavBar'
+import LeaveApplication from './components/Application';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
       <div>
-        <AppBar color="primary" position="static">
-          <h1>My header</h1>
-        </AppBar>
-
+        <NavBar />
+          <LeaveApplication />
       </div>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <Button variant="contained" color="primary">
-            Hello World
-          </Button>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    )
   }
 }
 
