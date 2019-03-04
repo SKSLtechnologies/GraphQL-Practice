@@ -8,8 +8,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Palette from './Palette';
 
 
 const styles = theme => ({
@@ -49,8 +50,6 @@ const styles = theme => ({
 
 function Signup(props) {
     const { classes } = props;
-  
-
     return (
         <main className={classes.layout}>
           <CssBaseline />
@@ -75,15 +74,7 @@ function Signup(props) {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Are you an admin?"
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign up
-              </Button>
+            <Palette />
             </form>
           </Paper>
         </main>

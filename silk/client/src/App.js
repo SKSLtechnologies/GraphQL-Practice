@@ -5,9 +5,11 @@ import Signup from './components/Signup';
 class App extends Component {
   render() {
     return (
-      <div>
-        <NavBar />
+      <div className="App">
+        <div>
+          <NavBar />
           <Signup />
+        </div>
       </div>
     )
   }
